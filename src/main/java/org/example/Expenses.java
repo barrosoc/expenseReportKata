@@ -18,4 +18,10 @@ public class Expenses {
                 .mapToInt(e -> e.amount)
                 .sum();
     }
+
+    public int total() {
+        return expenses.stream()
+                .mapToInt(e -> e.amount)
+                .sum();
+    }
 }

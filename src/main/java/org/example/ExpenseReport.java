@@ -31,10 +31,7 @@ public class ExpenseReport {
     }
 
     public void printReport(List<Expense> expenses) {
-        int total = 0;
-
         System.out.println("Expenses " + currentDate);
-
 
         for (Expense expense : expenses) {
             String expenseName = "";
@@ -53,15 +50,11 @@ public class ExpenseReport {
             String mealOverExpensesMarker = expense.type == ExpenseType.DINNER && expense.amount > 5000 || expense.type == ExpenseType.BREAKFAST && expense.amount > 1000 ? "X" : " ";
 
             System.out.println(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
-
-            total += expense.amount;
         }
 
-        System.out.println("Meal expenses: " + calculateMealExpenses(expenses));
-        System.out.println("Total expenses: " + total);
+        Expenses expenses1 = new Expenses(expenses);
+        System.out.println("Meal expenses: " + expenses1.calculateMealExpenses());
+        System.out.println("Total expenses: " + expenses1.total());
     }
 
-    private static int calculateMealExpenses(List<Expense> expenses) {
-        return new Expenses(expenses).calculateMealExpenses();
-    }
 }
