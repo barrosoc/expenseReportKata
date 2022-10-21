@@ -57,11 +57,11 @@ public class ExpenseReport {
             total += expense.amount;
         }
 
-        int mealExpenses = expenses.stream()
-                .filter(e -> e.type == ExpenseType.DINNER || e.type == ExpenseType.BREAKFAST )
-                .mapToInt(e -> e.amount)
-                .sum();
-        System.out.println("Meal expenses: " + mealExpenses);
+        System.out.println("Meal expenses: " + calculateMealExpenses(expenses));
         System.out.println("Total expenses: " + total);
+    }
+
+    private static int calculateMealExpenses(List<Expense> expenses) {
+        return new Expenses(expenses).calculateMealExpenses();
     }
 }
