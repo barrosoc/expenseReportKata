@@ -32,16 +32,11 @@ public class ExpenseReport {
 
     public void printReport(List<Expense> expenses) {
         int total = 0;
-        int mealExpenses = 0;
-
 
         System.out.println("Expenses " + currentDate);
 
-        for (Expense expense : expenses) {
-            if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST) {
-                mealExpenses += expense.amount;
-            }
 
+        for (Expense expense : expenses) {
             String expenseName = "";
             switch (expense.type) {
                 case DINNER:
@@ -62,6 +57,10 @@ public class ExpenseReport {
             total += expense.amount;
         }
 
+        int mealExpenses = expenses.stream()
+                .filter(e -> e.type == ExpenseType.DINNER || e.type == ExpenseType.BREAKFAST )
+                .mapToInt(e -> e.amount)
+                .sum();
         System.out.println("Meal expenses: " + mealExpenses);
         System.out.println("Total expenses: " + total);
     }
