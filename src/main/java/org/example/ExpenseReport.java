@@ -20,6 +20,14 @@ public class ExpenseReport {
             this.type = type;
             this.amount = amount;
         }
+
+        public boolean isABreakfastCostingMoreThan1000() {
+            return type == ExpenseType.BREAKFAST && amount > 1000;
+        }
+
+        public boolean isADinnerCostingMoreThan5000() {
+            return type == ExpenseType.DINNER && amount > 5000;
+        }
     }
 
     public ExpenseReport() {
@@ -47,7 +55,7 @@ public class ExpenseReport {
                     break;
             }
 
-            String mealOverExpensesMarker = expense.type == ExpenseType.DINNER && expense.amount > 5000 || expense.type == ExpenseType.BREAKFAST && expense.amount > 1000 ? "X" : " ";
+            String mealOverExpensesMarker = expense.isADinnerCostingMoreThan5000() || expense.isABreakfastCostingMoreThan1000() ? "X" : " ";
 
             System.out.println(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
         }
