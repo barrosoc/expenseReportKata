@@ -3,21 +3,39 @@ package org.example;
 import java.util.Date;
 import java.util.List;
 
-enum ExpenseType {
-    DINNER, BREAKFAST, CAR_RENTAL
-}
-
-class Expense {
-    ExpenseType type;
-    int amount;
-}
 
 public class ExpenseReport {
+
+    private final Date currentDate;
+
+    public enum ExpenseType {
+        DINNER, BREAKFAST, CAR_RENTAL
+    }
+
+    public static class Expense {
+        ExpenseType type;
+        int amount;
+
+        public Expense(ExpenseType type, int amount) {
+            this.type = type;
+            this.amount = amount;
+        }
+    }
+
+    public ExpenseReport() {
+        this.currentDate = new Date();
+    }
+
+    public ExpenseReport(Date currentDate) {
+        this.currentDate = currentDate;
+    }
+
     public void printReport(List<Expense> expenses) {
         int total = 0;
         int mealExpenses = 0;
 
-        System.out.println("Expenses " + new Date());
+
+        System.out.println("Expenses " + currentDate);
 
         for (Expense expense : expenses) {
             if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST) {
