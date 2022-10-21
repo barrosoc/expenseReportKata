@@ -13,8 +13,9 @@ import static org.junit.Assert.assertEquals;
 
 public class ExpenseReportTest {
 
-    private static final int MAX_AMOUNT = 200;
+    private static final int MAX_AMOUNT = 6000;
     private static final List<ExpenseType> expenseTypes = Arrays.asList(ExpenseType.BREAKFAST, ExpenseType.BREAKFAST, ExpenseType.DINNER, ExpenseType.DINNER, ExpenseType.CAR_RENTAL);
+    public static final int AMOUNT_INCREMENT = 30;
 
     @Test
     public void goldenMaster() throws IOException {
@@ -25,7 +26,7 @@ public class ExpenseReportTest {
         List<Expense> expenses = new ArrayList<>();
         expenseReport.printReport(expenses);
         for (ExpenseType expenseType : expenseTypes) {
-            for (int amount = 0; amount < MAX_AMOUNT; amount++) {
+            for (int amount = 0; amount < MAX_AMOUNT; amount=amount + AMOUNT_INCREMENT) {
                 expenses.add(new Expense(expenseType, amount));
                 expenseReport.printReport(expenses);
             }
@@ -41,7 +42,7 @@ public class ExpenseReportTest {
         List<Expense> expenses = new ArrayList<>();
         expenseReport.printReport(expenses);
         for (ExpenseType expenseType : expenseTypes) {
-            for (int amount = 0; amount < MAX_AMOUNT; amount++) {
+            for (int amount = 0; amount < MAX_AMOUNT; amount=amount+ AMOUNT_INCREMENT) {
                 expenses.add(new Expense(expenseType, amount));
                 expenseReport.printReport(expenses);
             }
